@@ -5,9 +5,9 @@ export default function FileInput() {
   useEffect(() => {
     let data = window.localStorage.getItem("data");
     //Stringify then parse avoiding error when only parsing
-    let pData = JSON.parse(data);
-    console.log(typeof pData);
-    pData.forEach((item) => console.log(item));
+    // let pData = JSON.parse(data);
+    console.log(typeof data, data);
+    // pData.forEach((item) => console.log(item));
   }, []);
 
   const handleUpload = (e) => {
@@ -21,7 +21,7 @@ export default function FileInput() {
     axios.post("http://localhost:5000/convert", formData).then((data) => {
       console.log(data.data);
       console.log(typeof data.data);
-      window.localStorage.setItem("data", JSON.stringify(data.data));
+      window.localStorage.setItem("data", data.data);
     });
 
     e.preventDefault();
