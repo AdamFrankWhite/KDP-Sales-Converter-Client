@@ -1,5 +1,4 @@
 import React from "react";
-
 export default function ConversionTable(props) {
   let paperbacks = props.paperbacks;
   let ebooks = props.ebooks;
@@ -99,48 +98,30 @@ export default function ConversionTable(props) {
       }
     }
   };
+
   sortByCurrency(paperbacks, "paperbackRoyalty");
   sortByCurrency(ebooks, "ebookRoyalty");
-  //   const rows = marketplaces.map((marketplace) => {
-  //     return (
-  //       <tr>
-  //         <td>{marketplace.name}</td>
-  //         <td>{marketplace.currency}</td>
-  //         <td>{marketplace.ebookRoyalty}</td>
-  //         <td>{marketplace.paperbackRoyalty}</td>
-  //         <td>{marketplace.ebookRoyalty + marketplace.paperbackRoyalty}</td>
-  //       </tr>
-  //     );
-  //   });
+
+  // Create table rows
   const rows = [];
   for (const currency in marketplaces) {
     let singleCurrencyCombinedSales = marketplaces[currency];
+    let singleCurrencyTotal =
+      singleCurrencyCombinedSales.ebookRoyalty +
+      singleCurrencyCombinedSales.paperbackRoyalty;
     let row = (
       <tr>
         <td>{singleCurrencyCombinedSales.name}</td>
         <td>{singleCurrencyCombinedSales.currency}</td>
         <td>{singleCurrencyCombinedSales.ebookRoyalty.toFixed(2)}</td>
         <td>{singleCurrencyCombinedSales.paperbackRoyalty.toFixed(2)}</td>
-        <td>
-          {singleCurrencyCombinedSales.ebookRoyalty +
-            singleCurrencyCombinedSales.paperbackRoyalty}
-        </td>
+        <td>{singleCurrencyTotal.toFixed(2)}</td>
       </tr>
     );
     rows.push(row);
   }
-  console.log(marketplaces);
   return (
     <div>
-      <button
-        onClick={() => {
-          sortByCurrency(ebooks);
-          sortByCurrency(paperbacks);
-        }}
-      >
-        Get money
-      </button>
-
       <table>
         <thead>
           <tr>
