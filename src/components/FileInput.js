@@ -36,7 +36,19 @@ export default function FileInput() {
 
     // e.preventDefault();
   };
+  const [myCurrency, setMyCurrency] = useState("");
+  const [exchangeRates, setExchangeRates] = useState([]);
+  const selectCurrency = (e) => {
+    console.log(e.target.value);
+    setMyCurrency(e.target.value);
 
+    axios
+      .get(`https://api.exchangeratesapi.io/latest?base=${myCurrency}`)
+      .then((res) => {
+        setExchangeRates(res.data.rates);
+        console.log(res.data.rates);
+      });
+  };
   return (
     <div>
       <p>Upload your royalty XLSX file here:</p>
@@ -49,8 +61,17 @@ export default function FileInput() {
       >
         Sort
       </button>
-
-      <ConversionTable paperbacks={paperbacks} ebooks={ebooks} />
+      <select onBlur={(e) => selectCurrency(e)}>
+        <option value="EUR">E</option>
+        <option value="GBP">£</option>
+        <option value="USD">$</option>
+      </select>
+      <ConversionTable
+        chosenCurrency={myCurrency}
+        rates={exchangeRates}
+        paperbacks={paperbacks}
+        ebooks={ebooks}
+      />
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+
 export default function ConversionTable(props) {
   let paperbacks = props.paperbacks;
   let ebooks = props.ebooks;
@@ -104,7 +105,9 @@ export default function ConversionTable(props) {
 
   // Create table rows
   const rows = [];
+
   for (const currency in marketplaces) {
+    console.log(props.rates);
     let singleCurrencyCombinedSales = marketplaces[currency];
     let singleCurrencyTotal =
       singleCurrencyCombinedSales.ebookRoyalty +
@@ -116,6 +119,7 @@ export default function ConversionTable(props) {
         <td>{singleCurrencyCombinedSales.ebookRoyalty.toFixed(2)}</td>
         <td>{singleCurrencyCombinedSales.paperbackRoyalty.toFixed(2)}</td>
         <td>{singleCurrencyTotal.toFixed(2)}</td>
+        <td>{(singleCurrencyTotal / props.rates[currency]).toFixed(2)}</td>
       </tr>
     );
     rows.push(row);
@@ -130,6 +134,7 @@ export default function ConversionTable(props) {
             <td>Ebook Royalty</td>
             <td>Paperback Royalty</td>
             <td>Total</td>
+            <td>{props.chosenCurrency}</td>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
