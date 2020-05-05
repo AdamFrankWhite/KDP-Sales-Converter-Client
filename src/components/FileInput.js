@@ -38,10 +38,7 @@ export default function FileInput() {
   };
   const [myCurrency, setMyCurrency] = useState("");
   const [exchangeRates, setExchangeRates] = useState([]);
-  const selectCurrency = (e) => {
-    console.log(e.target.value);
-    setMyCurrency(e.target.value);
-
+  const selectCurrency = () => {
     axios
       .get(`https://api.exchangeratesapi.io/latest?base=${myCurrency}`)
       .then((res) => {
@@ -49,23 +46,39 @@ export default function FileInput() {
         console.log(res.data.rates);
       });
   };
+  // Update sales totals once myCurrency has been set
+  useEffect(() => {
+    selectCurrency();
+  }, [myCurrency]);
   return (
     <div>
       <p>Upload your royalty XLSX file here:</p>
       <input onChange={handleUpload} type="file"></input>
-      <button
+      {/* <button
         onClick={() => {
           console.log("Paperbacks: ", paperbacks);
           console.log("Ebooks: ", ebooks);
         }}
       >
         Sort
-      </button>
-      <select onBlur={(e) => selectCurrency(e)}>
-        <option value="EUR">E</option>
+      </button> */}
+      <select
+        onChange={(e) => {
+          console.log(myCurrency);
+
+          setMyCurrency(e.target.value);
+          console.log(myCurrency);
+          // EVERYTHING is working fine, except setMyCurrency is async, so when selectCurrency is called, it is before updated currency. need to use useEffect with a callback
+          selectCurrency();
+        }}
+      >
+        <option selected value="EUR">
+          E
+        </option>
         <option value="GBP">£</option>
         <option value="USD">$</option>
       </select>
+      <button onClick={() => console.log(myCurrency)}>Check</button>
       <ConversionTable
         chosenCurrency={myCurrency}
         rates={exchangeRates}

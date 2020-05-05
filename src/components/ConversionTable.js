@@ -107,7 +107,6 @@ export default function ConversionTable(props) {
   const rows = [];
 
   for (const currency in marketplaces) {
-    console.log(props.rates);
     let singleCurrencyCombinedSales = marketplaces[currency];
     let singleCurrencyTotal =
       singleCurrencyCombinedSales.ebookRoyalty +
