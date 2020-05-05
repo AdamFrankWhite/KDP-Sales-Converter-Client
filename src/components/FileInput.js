@@ -31,12 +31,20 @@ export default function FileInput() {
     // e.preventDefault();
     axios.post("http://localhost:5000/convert", formData).then((data) => {
       console.log(data.data);
-      window.localStorage.setItem("data", JSON.stringify(data.data));
+      //checks if monthly report, if so need to restructure json
+      if (data.data[0].hasOwnProperty("Sales Period")) {
+        console.log("Monthly report");
+      } else if (data.data[0].hasOwnProperty("Date")) {
+        console.log("Historical report");
+      } else {
+        window.localStorage.setItem("data", JSON.stringify(data.data));
+        console.log("Regular report");
+      }
     });
 
     // e.preventDefault();
   };
-  const [myCurrency, setMyCurrency] = useState("");
+  const [myCurrency, setMyCurrency] = useState("EUR");
   const [exchangeRates, setExchangeRates] = useState([]);
   const selectCurrency = () => {
     axios
@@ -54,22 +62,9 @@ export default function FileInput() {
     <div>
       <p>Upload your royalty XLSX file here:</p>
       <input onChange={handleUpload} type="file"></input>
-      {/* <button
-        onClick={() => {
-          console.log("Paperbacks: ", paperbacks);
-          console.log("Ebooks: ", ebooks);
-        }}
-      >
-        Sort
-      </button> */}
       <select
         onChange={(e) => {
-          console.log(myCurrency);
-
           setMyCurrency(e.target.value);
-          console.log(myCurrency);
-          // EVERYTHING is working fine, except setMyCurrency is async, so when selectCurrency is called, it is before updated currency. need to use useEffect with a callback
-          selectCurrency();
         }}
       >
         <option selected value="EUR">
@@ -78,7 +73,6 @@ export default function FileInput() {
         <option value="GBP">£</option>
         <option value="USD">$</option>
       </select>
-      <button onClick={() => console.log(myCurrency)}>Check</button>
       <ConversionTable
         chosenCurrency={myCurrency}
         rates={exchangeRates}

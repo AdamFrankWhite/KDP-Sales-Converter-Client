@@ -43,3 +43,12 @@ td {
   color: black;
   border: white 1px solid;
 }
+
+.empty {
+  background-color: gray;
+}
+
+.grandTotal {
+  background-color: black;
+  color: white;
+}

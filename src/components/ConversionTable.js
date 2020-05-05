@@ -105,24 +105,45 @@ export default function ConversionTable(props) {
 
   // Create table rows
   const rows = [];
-
-  for (const currency in marketplaces) {
-    let singleCurrencyCombinedSales = marketplaces[currency];
-    let singleCurrencyTotal =
-      singleCurrencyCombinedSales.ebookRoyalty +
-      singleCurrencyCombinedSales.paperbackRoyalty;
-    let row = (
-      <tr>
-        <td>{singleCurrencyCombinedSales.name}</td>
-        <td>{singleCurrencyCombinedSales.currency}</td>
-        <td>{singleCurrencyCombinedSales.ebookRoyalty.toFixed(2)}</td>
-        <td>{singleCurrencyCombinedSales.paperbackRoyalty.toFixed(2)}</td>
-        <td>{singleCurrencyTotal.toFixed(2)}</td>
-        <td>{(singleCurrencyTotal / props.rates[currency]).toFixed(2)}</td>
-      </tr>
-    );
-    rows.push(row);
+  let combinedConvertedTotal = 0;
+  for (const marketplace in marketplaces) {
+    let singleMarketplaceCombinedSales = marketplaces[marketplace];
+    let singleMarketplaceTotal =
+      singleMarketplaceCombinedSales.ebookRoyalty +
+      singleMarketplaceCombinedSales.paperbackRoyalty;
+    //Check if same currency as selected, to leave as is
+    let convertedTotal = (props.rates[marketplace]
+      ? singleMarketplaceTotal / props.rates[marketplace]
+      : singleMarketplaceTotal
+    ).toFixed(2);
+    // Check this line
+    combinedConvertedTotal += singleMarketplaceTotal;
+    if (singleMarketplaceTotal > 0) {
+      let row = (
+        <tr>
+          <td>{singleMarketplaceCombinedSales.name}</td>
+          <td>{singleMarketplaceCombinedSales.currency}</td>
+          <td>{singleMarketplaceCombinedSales.ebookRoyalty.toFixed(2)}</td>
+          <td>{singleMarketplaceCombinedSales.paperbackRoyalty.toFixed(2)}</td>
+          <td>{singleMarketplaceTotal.toFixed(2)}</td>
+          <td>{convertedTotal}</td>
+        </tr>
+      );
+      rows.push(row);
+    }
   }
+  let totalRow = (
+    <tr>
+      <td className="empty"></td>
+      <td className="empty"></td>
+      <td className="empty"></td>
+      <td className="empty"></td>
+      <td className="empty"></td>
+      <td className="grandTotal">{combinedConvertedTotal.toFixed(2)}</td>
+    </tr>
+  );
+  rows.push(totalRow);
+
   return (
     <div>
       <table>
