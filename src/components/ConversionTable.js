@@ -27,7 +27,7 @@ export default function ConversionTable(props) {
     },
 
     EUR: {
-      name: "Amazon.EU",
+      name: "Amazon.de/es/fr/it/nl",
       currency: "EUR",
       ebookRoyalty: 0,
       paperbackRoyalty: 0,
@@ -116,8 +116,8 @@ export default function ConversionTable(props) {
       ? singleMarketplaceTotal / props.rates[marketplace]
       : singleMarketplaceTotal
     ).toFixed(2);
-    // Check this line
-    combinedConvertedTotal += singleMarketplaceTotal;
+    // Add individual currency totals together
+    combinedConvertedTotal += parseFloat(convertedTotal);
     if (singleMarketplaceTotal > 0) {
       let row = (
         <tr>
@@ -126,7 +126,7 @@ export default function ConversionTable(props) {
           <td>{singleMarketplaceCombinedSales.ebookRoyalty.toFixed(2)}</td>
           <td>{singleMarketplaceCombinedSales.paperbackRoyalty.toFixed(2)}</td>
           <td>{singleMarketplaceTotal.toFixed(2)}</td>
-          <td>{convertedTotal}</td>
+          <td className="gray-white">{convertedTotal}</td>
         </tr>
       );
       rows.push(row);
@@ -134,7 +134,7 @@ export default function ConversionTable(props) {
   }
   let totalRow = (
     <tr>
-      <td className="empty"></td>
+      <td className="gray-white">Total</td>
       <td className="empty"></td>
       <td className="empty"></td>
       <td className="empty"></td>
@@ -154,7 +154,7 @@ export default function ConversionTable(props) {
             <td>Ebook Royalty</td>
             <td>Paperback Royalty</td>
             <td>Total</td>
-            <td>{props.chosenCurrency}</td>
+            <td className="gray-white">{props.chosenCurrency}</td>
           </tr>
         </thead>
         <tbody>{rows}</tbody>
