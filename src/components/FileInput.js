@@ -1,26 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ConversionTable from "./ConversionTable";
+import runMonthlyReport from "../functions/MonthlyReport";
 
 export default function FileInput() {
   const [ebooks, setEbooks] = useState([]);
   const [paperbacks, setPaperbacks] = useState([]);
   useEffect(() => {
-    let data = window.localStorage.getItem("data");
-    //Sanitise data by stringify then parse - for some reason won't work directly
-    let pData = JSON.parse(data);
+    if (window.localStorage.getItem("data")) {
+      let data = window.localStorage.getItem("data");
+      //Sanitise data by stringify then parse - for some reason won't work directly
+      let pData = JSON.parse(data);
 
-    //Filter books in paperbacks and ebooks
-    let filteredEbooks = pData.filter(
-      (item) => !item["Transaction Type"].includes("Paperback")
-    );
-    let filteredPaperbacks = pData.filter((item) =>
-      item["Transaction Type"].includes("Paperback")
-    );
+      //Filter books in paperbacks and ebooks
+      let filteredEbooks = pData.filter(
+        (item) => !item["Transaction Type"].includes("Paperback")
+      );
+      let filteredPaperbacks = pData.filter((item) =>
+        item["Transaction Type"].includes("Paperback")
+      );
 
-    //Update state
-    setEbooks(filteredEbooks);
-    setPaperbacks(filteredPaperbacks);
+      //Update state
+      setEbooks(filteredEbooks);
+      setPaperbacks(filteredPaperbacks);
+    }
   }, []);
 
   const handleUpload = (e) => {
@@ -34,6 +37,8 @@ export default function FileInput() {
       //checks if monthly report, if so need to restructure json
       if (data.data[0].hasOwnProperty("Sales Period")) {
         console.log("Monthly report");
+        console.log(data);
+        runMonthlyReport(data.data);
       } else if (data.data[0].hasOwnProperty("Date")) {
         console.log("Historical report");
       } else {
