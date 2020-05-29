@@ -2,31 +2,33 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ConversionTable from "./ConversionTable";
 import runMonthlyReport from "../functions/MonthlyReport";
+import Loader from "react-loader-spinner";
 
 export default function FileInput() {
   const [ebooks, setEbooks] = useState([]);
   const [paperbacks, setPaperbacks] = useState([]);
-  useEffect(() => {
-    if (window.localStorage.getItem("data")) {
-      let data = window.localStorage.getItem("data");
-      //Sanitise data by stringify then parse - for some reason won't work directly
-      let pData = JSON.parse(data);
 
+  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    if (data) {
+      let parsedData = JSON.parse(data);
       //Filter books in paperbacks and ebooks
-      let filteredEbooks = pData.filter(
+      let filteredEbooks = parsedData.filter(
         (item) => !item["Transaction Type"].includes("Paperback")
       );
-      let filteredPaperbacks = pData.filter((item) =>
+      let filteredPaperbacks = parsedData.filter((item) =>
         item["Transaction Type"].includes("Paperback")
       );
-
+      console.log(filteredEbooks, filteredPaperbacks);
       //Update state
       setEbooks(filteredEbooks);
       setPaperbacks(filteredPaperbacks);
     }
-  }, []);
+  }, [data]);
 
   const handleUpload = (e) => {
+    setLoading(true);
     e.nativeEvent.stopImmediatePropagation();
     const file = e.target.files[0];
     const formData = new FormData();
@@ -42,11 +44,12 @@ export default function FileInput() {
       } else if (data.data[0].hasOwnProperty("Date")) {
         console.log("Historical report");
       } else {
-        window.localStorage.setItem("data", JSON.stringify(data.data));
+        setData(JSON.stringify(data.data));
         console.log("Regular report");
+        setLoading(false);
       }
     });
-
+    // e.nativeEvent.stopImmediatePropagation();
     // e.preventDefault();
   };
   const [myCurrency, setMyCurrency] = useState("EUR");
@@ -67,6 +70,9 @@ export default function FileInput() {
     <div>
       <p>Upload your royalty XLSX file here:</p>
       <input onChange={handleUpload} type="file"></input>
+      {loading && (
+        <Loader type="Puff" color="#00BFFF" height={100} width={100} />
+      )}
       <select
         onChange={(e) => {
           setMyCurrency(e.target.value);
