@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ConversionTable from "./ConversionTable";
 import runMonthlyReport from "../functions/MonthlyReport";
-import Loader from "react-loader-spinner";
 
-export default function FileInput() {
+export default function FileInput(props) {
   const [ebooks, setEbooks] = useState([]);
   const [paperbacks, setPaperbacks] = useState([]);
 
-  const [loading, setLoading] = useState(false);
   const [data, setData] = useState(null);
   useEffect(() => {
     if (data) {
@@ -28,12 +26,11 @@ export default function FileInput() {
   }, [data]);
 
   const handleUpload = (e) => {
-    setLoading(true);
+    props.loading(true);
     e.nativeEvent.stopImmediatePropagation();
     const file = e.target.files[0];
     const formData = new FormData();
     formData.append("file", file);
-    // e.preventDefault();
     axios.post("http://localhost:5000/convert", formData).then((data) => {
       console.log(data.data);
       //checks if monthly report, if so need to restructure json
@@ -45,12 +42,9 @@ export default function FileInput() {
         console.log("Historical report");
       } else {
         setData(JSON.stringify(data.data));
-        console.log("Regular report");
-        setLoading(false);
+        props.loading(false);
       }
     });
-    // e.nativeEvent.stopImmediatePropagation();
-    // e.preventDefault();
   };
   const [myCurrency, setMyCurrency] = useState("EUR");
   const [exchangeRates, setExchangeRates] = useState([]);
@@ -70,9 +64,7 @@ export default function FileInput() {
     <div>
       <p>Upload your royalty XLSX file here:</p>
       <input onChange={handleUpload} type="file"></input>
-      {loading && (
-        <Loader type="Puff" color="#00BFFF" height={100} width={100} />
-      )}
+
       <select
         onChange={(e) => {
           setMyCurrency(e.target.value);
