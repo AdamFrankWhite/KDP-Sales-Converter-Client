@@ -118,6 +118,7 @@ export default function ConversionTable(props) {
     ).toFixed(2);
     // Add individual currency totals together
     combinedConvertedTotal += parseFloat(convertedTotal);
+    // Check if any sales
     if (singleMarketplaceTotal > 0) {
       let row = (
         <tr>
