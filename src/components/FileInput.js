@@ -50,6 +50,7 @@ export default function FileInput(props) {
         props.loading(false);
       } else {
         console.log("Error");
+        props.loading(false);
       }
     });
   };
@@ -83,21 +84,24 @@ export default function FileInput(props) {
           <DescriptionOutlinedIcon fontSize="inherit" className="upload-icon" />
           Upload File
         </label>
+        <a href="#instructions">Need Help?</a>
         <p>{fileName}</p>
-        <br></br>
-        <span>Convert to: </span>
-        <select
-          className="set-currency"
-          onChange={(e) => {
-            setMyCurrency(e.target.value);
-          }}
-        >
-          <option selected value="EUR">
-            EUR €
-          </option>
-          <option value="GBP">GDP £</option>
-          <option value="USD">USD $</option>
-        </select>
+        <hr></hr>
+        <div className="set-currency-cont">
+          <span>Convert to: </span>
+          <select
+            className="set-currency"
+            onChange={(e) => {
+              setMyCurrency(e.target.value);
+            }}
+          >
+            <option selected value="EUR">
+              EUR €
+            </option>
+            <option value="GBP">GDP £</option>
+            <option value="USD">USD $</option>
+          </select>
+        </div>
       </div>
       <ConversionTable
         chosenCurrency={myCurrency}

@@ -146,20 +146,18 @@ export default function ConversionTable(props) {
   rows.push(totalRow);
 
   return (
-    <div>
-      <table>
-        <thead>
-          <tr>
-            <td>Marketplace</td>
-            <td>Currency</td>
-            <td>Ebook Royalty</td>
-            <td>Paperback Royalty</td>
-            <td>Total</td>
-            <td className="gray-white">{props.chosenCurrency}</td>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </table>
-    </div>
+    <table id="conversion-table">
+      <thead>
+        <tr>
+          <td>Marketplace</td>
+          <td>Currency</td>
+          <td>Ebook Royalty</td>
+          <td>Paperback Royalty</td>
+          <td>Total</td>
+          <td className="gray-white">{props.chosenCurrency}</td>
+        </tr>
+      </thead>
+      <tbody>{rows}</tbody>
+    </table>
   );
 }
