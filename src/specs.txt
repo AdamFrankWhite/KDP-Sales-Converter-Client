@@ -1,2 +1,5 @@
 API locatiion: 
 https://powerful-refuge-29455.herokuapp.com/
+
+Client location:
+https://lit-mountain-56519.herokuapp.com/ 
