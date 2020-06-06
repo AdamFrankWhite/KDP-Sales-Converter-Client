@@ -36,23 +36,25 @@ export default function FileInput(props) {
     //Create formData
     const formData = new FormData();
     formData.append("file", file);
-    axios.post("http://localhost:5000/convert", formData).then((data) => {
-      console.log(data.data);
-      //checks if monthly report, if so need to restructure json
-      if (data.data[0].hasOwnProperty("Sales Period")) {
-        console.log("Monthly report");
-        console.log(data);
-        runMonthlyReport(data.data);
-      } else if (data.data[0].hasOwnProperty("Date")) {
-        console.log("Historical report");
-      } else if (data.data[0].hasOwnProperty("Title")) {
-        setData(JSON.stringify(data.data));
-        props.loading(false);
-      } else {
-        console.log("Error");
-        props.loading(false);
-      }
-    });
+    axios
+      .post("https://powerful-refuge-29455.herokuapp.com/convert", formData)
+      .then((data) => {
+        console.log(data.data);
+        //checks if monthly report, if so need to restructure json
+        if (data.data[0].hasOwnProperty("Sales Period")) {
+          console.log("Monthly report");
+          console.log(data);
+          runMonthlyReport(data.data);
+        } else if (data.data[0].hasOwnProperty("Date")) {
+          console.log("Historical report");
+        } else if (data.data[0].hasOwnProperty("Title")) {
+          setData(JSON.stringify(data.data));
+          props.loading(false);
+        } else {
+          console.log("Error");
+          props.loading(false);
+        }
+      });
   };
   const [myCurrency, setMyCurrency] = useState("EUR");
   const [exchangeRates, setExchangeRates] = useState([]);
