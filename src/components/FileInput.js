@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ConversionTable from "./ConversionTable";
 import runMonthlyReport from "../functions/MonthlyReport";
+import DescriptionOutlinedIcon from "@material-ui/icons/DescriptionOutlined";
 
 export default function FileInput(props) {
   const [ebooks, setEbooks] = useState([]);
   const [paperbacks, setPaperbacks] = useState([]);
+  const [fileName, setFileName] = useState("");
 
   const [data, setData] = useState(null);
   useEffect(() => {
@@ -29,6 +31,9 @@ export default function FileInput(props) {
     props.loading(true);
     e.nativeEvent.stopImmediatePropagation();
     const file = e.target.files[0];
+    //Set filename hook
+    setFileName(file.name);
+    //Create formData
     const formData = new FormData();
     formData.append("file", file);
     axios.post("http://localhost:5000/convert", formData).then((data) => {
@@ -40,9 +45,11 @@ export default function FileInput(props) {
         runMonthlyReport(data.data);
       } else if (data.data[0].hasOwnProperty("Date")) {
         console.log("Historical report");
-      } else {
+      } else if (data.data[0].hasOwnProperty("Title")) {
         setData(JSON.stringify(data.data));
         props.loading(false);
+      } else {
+        console.log("Error");
       }
     });
   };
@@ -62,20 +69,36 @@ export default function FileInput(props) {
   }, [myCurrency]);
   return (
     <div>
-      <p>Upload your royalty XLSX file here:</p>
-      <input onChange={handleUpload} type="file"></input>
-
-      <select
-        onChange={(e) => {
-          setMyCurrency(e.target.value);
-        }}
-      >
-        <option selected value="EUR">
-          E
-        </option>
-        <option value="GBP">£</option>
-        <option value="USD">$</option>
-      </select>
+      <div className="file-input-cont">
+        {/* <p>Upload your royalty XLSX file here:</p> */}
+        {/* Hidden */}
+        <input
+          onChange={handleUpload}
+          id="file-upload"
+          type="file"
+          accept=".xlsx"
+        ></input>
+        {/* File Input UI */}
+        <label for="file-upload" className="upload-link">
+          <DescriptionOutlinedIcon fontSize="inherit" className="upload-icon" />
+          Upload File
+        </label>
+        <p>{fileName}</p>
+        <br></br>
+        <span>Convert to: </span>
+        <select
+          className="set-currency"
+          onChange={(e) => {
+            setMyCurrency(e.target.value);
+          }}
+        >
+          <option selected value="EUR">
+            EUR €
+          </option>
+          <option value="GBP">GDP £</option>
+          <option value="USD">USD $</option>
+        </select>
+      </div>
       <ConversionTable
         chosenCurrency={myCurrency}
         rates={exchangeRates}
