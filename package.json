@@ -1,5 +1,6 @@
 {
   "name": "kdp-app-client",
+  "homepage": "https://lit-mountain-56519.herokuapp.com/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
