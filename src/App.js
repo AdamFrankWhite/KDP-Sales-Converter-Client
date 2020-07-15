@@ -42,6 +42,7 @@ function App() {
 
       <hr className="hr-main"></hr>
       <Instructions />
+      <hr className="hr-main"></hr>
       <section id="disclaimer">
         <h3>Disclaimer</h3>
         <p>

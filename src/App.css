@@ -22,11 +22,6 @@ a {
   font-size: 0.7em;
   margin: 0 auto;
 }
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-link {
   color: #61dafb;
@@ -50,7 +45,7 @@ a {
 }
 
 .file-input-cont {
-  width: 50%;
+  width: 60%;
   margin: 1em auto;
   border-radius: 10px;
   border: white 2px solid;
@@ -122,16 +117,11 @@ input[type="file"] {
 .text-small {
   font-size: 0.8em;
 }
+
 #disclaimer p {
+  width: 80%;
+  margin: auto;
   font-style: italic;
-}
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 td {
@@ -162,4 +152,22 @@ tr:hover td {
 
 table:hover td {
   cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .file-input-cont {
+    width: 75%;
+    font-size: 0.8em;
+  }
+  #conversion-table {
+    margin: 1em auto;
+    font-size: 0.55em;
+  }
+  #instructions {
+    width: 95%;
+  }
+  #disclaimer p {
+    width: 95%;
+    font-size: 0.7em;
+  }
 }
