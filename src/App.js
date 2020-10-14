@@ -51,8 +51,7 @@ function App() {
             </LoadingOverlay>
 
             <Instructions />
-            <About />
-            <Disclaimer />
+
             <Footer />
         </div>
     );

@@ -1,5 +1,11 @@
 import React from "react";
-
+import About from "./About";
+import Disclaimer from "./Disclaimer";
 export default function Footer() {
-    return <div></div>;
+    return (
+        <footer>
+            <About />
+            <Disclaimer />
+        </footer>
+    );
 }

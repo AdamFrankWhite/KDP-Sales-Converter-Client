@@ -15,6 +15,7 @@
 }
 html {
     scroll-behavior: smooth;
+    box-sizing: border-box;
 }
 a {
     color: orange;
@@ -125,6 +126,11 @@ input[type="file"] {
 }
 #instructions {
     background: rgb(78, 78, 78);
+    font-size: 0.8em;
+    text-align: center;
+    .content-frame {
+        padding: 1em;
+    }
 }
 #instructions ol {
     display: inline-block;
@@ -155,8 +161,6 @@ input[type="file"] {
 }
 #about,
 #instructions {
-    padding: 1.5em;
-    font-size: 0.8em;
     width: 100%;
 }
 // #instructions,
@@ -171,51 +175,50 @@ input[type="file"] {
 #disclaimer {
     padding: 1.5em 0;
     width: 100%;
-
-    h3 {
-        text-align: left;
-        background: white;
-        color: rgb(43, 43, 43);
-        padding: 0.5em;
-        border-radius: 10px;
-        display: flex;
-        width: 70%;
-        justify-content: space-between;
-        align-items: center;
-        &:hover {
-            cursor: pointer;
-        }
+}
+#disclaimer,
+#about {
+    font-size: 0.7em;
+    // padding: 1em;
+    @media (min-width: 1000px) {
+        padding: 2em;
     }
+    margin: auto;
+    width: 95%;
     p {
         width: 100%;
         margin: auto;
         text-align: left;
-        font-style: italic;
-        font-size: 0.7em;
+
         padding: 0.5em;
     }
 }
-
-.disclaimer-cont {
-    visibility: hidden;
-    width: 70%;
+#disclaimer p {
+    font-style: italic;
 }
+#disclaimer h3,
+#about h3 {
+    text-align: left;
+    background: white;
+    color: rgb(43, 43, 43);
+    padding: 0.5em;
+    border-radius: 10px;
 
-.disclaimer-cont-show {
-    visibility: show;
-    width: 70%;
-    animation: slide 0.2s;
+    &:hover {
+        cursor: pointer;
+    }
 }
-
-@keyframes slide {
-    0% {
-        opacity: 0;
-        transform: translateY(-3em);
+footer {
+    width: 100%;
+    // padding: 1em;
+    @media (min-width: 1000px) {
+        width: 80%;
+        flex-direction: row;
+        // padding: 2em;
     }
-
-    100% {
-        opacity: 1;
-    }
+    margin: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .rotate {
@@ -260,12 +263,5 @@ table:hover td {
     #conversion-table {
         margin: 1em auto;
         font-size: 0.55em;
-    }
-    #instructions {
-        width: 95%;
-    }
-    #disclaimer p {
-        width: 95%;
-        font-size: 0.7em;
     }
 }
