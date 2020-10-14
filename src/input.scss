@@ -1,0 +1,271 @@
+.App {
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(8px + 2vmin);
+    color: white;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+html {
+    scroll-behavior: smooth;
+}
+a {
+    color: orange;
+    font-size: 0.7em;
+    margin: 0 auto;
+    text-decoration: none;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+    background: url("/header.jpg") no-repeat center center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.header-content {
+    width: 80%;
+    margin: 3em auto;
+    border-radius: 10px;
+    background-color: rgba(40, 44, 52, 0.8);
+    padding: 0.5em;
+}
+
+.file-input-cont {
+    width: 60%;
+    margin: 1em auto;
+    border-radius: 10px;
+    border: white 2px solid;
+    text-align: center;
+}
+input[type="file"] {
+    display: none;
+}
+
+.nav-cont {
+    font-size: 0.8em;
+    h3 {
+        margin: 0.5em;
+    }
+    nav {
+        width: 100%;
+        background-color: rgb(15, 15, 15);
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        ul {
+            list-style-type: none;
+            display: flex;
+            flex-direction: row;
+            margin: 0;
+            padding: 0.5em;
+            li {
+                padding: 0.5em 0.75em;
+            }
+        }
+    }
+}
+
+.upload-link {
+    width: 80%;
+    margin: 0.75em auto 0 auto;
+    border: 1px gray solid;
+    border-radius: 5px;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-link:hover {
+    box-shadow: white 0px 0px 4px;
+}
+
+.upload-icon {
+    padding: 0.25em;
+    margin: 0.25em;
+    border: white 1px solid;
+    border-radius: 10px;
+}
+
+.upload-link:hover {
+    cursor: pointer;
+}
+
+.set-currency {
+    font-size: 1.25em;
+    padding: 0.25em;
+    border-radius: 5px;
+}
+.set-currency:hover {
+    cursor: pointer;
+}
+
+.set-currency-cont {
+    margin: 1em auto;
+}
+#instructions {
+    background: rgb(78, 78, 78);
+}
+#instructions ol {
+    display: inline-block;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#instructions ol li {
+    text-align: left;
+    padding-left: 1em;
+}
+
+.hr-main {
+    width: 90%;
+}
+
+#conversion-table {
+    margin: 1em auto;
+}
+.text-small {
+    font-size: 0.8em;
+}
+.content-frame {
+    @media (min-width: 800px) {
+        width: 70%;
+        margin: auto;
+    }
+}
+#about,
+#instructions {
+    padding: 1.5em;
+    font-size: 0.8em;
+    width: 100%;
+}
+// #instructions,
+// #disclaimer,
+// #about {
+//     @media (min-width: 800px) {
+//         width: 70%;
+//         margin: auto;
+//         text-align: left;
+//     }
+// }
+#disclaimer {
+    padding: 1.5em 0;
+    width: 100%;
+
+    h3 {
+        text-align: left;
+        background: white;
+        color: rgb(43, 43, 43);
+        padding: 0.5em;
+        border-radius: 10px;
+        display: flex;
+        width: 70%;
+        justify-content: space-between;
+        align-items: center;
+        &:hover {
+            cursor: pointer;
+        }
+    }
+    p {
+        width: 100%;
+        margin: auto;
+        text-align: left;
+        font-style: italic;
+        font-size: 0.7em;
+        padding: 0.5em;
+    }
+}
+
+.disclaimer-cont {
+    visibility: hidden;
+    width: 70%;
+}
+
+.disclaimer-cont-show {
+    visibility: show;
+    width: 70%;
+    animation: slide 0.2s;
+}
+
+@keyframes slide {
+    0% {
+        opacity: 0;
+        transform: translateY(-3em);
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.rotate {
+    transform: rotate(180deg);
+    transition: 0.2s transform;
+}
+td {
+    padding: 0.25em 0.5em;
+    background-color: white;
+    color: black;
+    border: white 1px solid;
+}
+
+.empty {
+    background-color: gray;
+}
+
+.grandTotal {
+    background-color: black;
+    color: white;
+}
+
+.gray-white {
+    background-color: gray;
+    color: white;
+}
+
+tr:hover td {
+    background-color: orange;
+    transition: background-color 0.15s;
+}
+
+table:hover td {
+    cursor: pointer;
+}
+
+@media (max-width: 767px) {
+    .file-input-cont {
+        width: 75%;
+        font-size: 0.8em;
+    }
+    #conversion-table {
+        margin: 1em auto;
+        font-size: 0.55em;
+    }
+    #instructions {
+        width: 95%;
+    }
+    #disclaimer p {
+        width: 95%;
+        font-size: 0.7em;
+    }
+}

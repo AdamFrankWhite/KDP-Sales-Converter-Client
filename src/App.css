@@ -1,12 +1,11 @@
 .App {
-  text-align: center;
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(8px + 2vmin);
   color: white;
 }
 
@@ -14,13 +13,19 @@
   height: 40vmin;
   pointer-events: none;
 }
+
 html {
   scroll-behavior: smooth;
 }
+
 a {
   color: orange;
   font-size: 0.7em;
   margin: 0 auto;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
 }
 
 .App-link {
@@ -29,6 +34,7 @@ a {
 
 .header {
   width: 100%;
+  text-align: center;
   background: url("/header.jpg") no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -51,8 +57,34 @@ a {
   border: white 2px solid;
   text-align: center;
 }
-input[type="file"] {
+
+input[type=file] {
   display: none;
+}
+
+.nav-cont {
+  font-size: 0.8em;
+}
+.nav-cont h3 {
+  margin: 0.5em;
+}
+.nav-cont nav {
+  width: 100%;
+  background-color: #0f0f0f;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-cont nav ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+  padding: 0.5em;
+}
+.nav-cont nav ul li {
+  padding: 0.5em 0.75em;
 }
 
 .upload-link {
@@ -86,6 +118,7 @@ input[type="file"] {
   padding: 0.25em;
   border-radius: 5px;
 }
+
 .set-currency:hover {
   cursor: pointer;
 }
@@ -93,9 +126,11 @@ input[type="file"] {
 .set-currency-cont {
   margin: 1em auto;
 }
+
 #instructions {
-  font-size: 0.8em;
+  background: #4e4e4e;
 }
+
 #instructions ol {
   display: inline-block;
   text-align: center;
@@ -114,14 +149,75 @@ input[type="file"] {
 #conversion-table {
   margin: 1em auto;
 }
+
 .text-small {
   font-size: 0.8em;
 }
 
+@media (min-width: 800px) {
+  .content-frame {
+    width: 70%;
+    margin: auto;
+  }
+}
+
+#about,
+#instructions {
+  padding: 1.5em;
+  font-size: 0.8em;
+  width: 100%;
+}
+
+#disclaimer {
+  padding: 1.5em 0;
+  width: 100%;
+}
+#disclaimer h3 {
+  text-align: left;
+  background: white;
+  color: #2b2b2b;
+  padding: 0.5em;
+  border-radius: 10px;
+  display: flex;
+  width: 70%;
+  justify-content: space-between;
+  align-items: center;
+}
+#disclaimer h3:hover {
+  cursor: pointer;
+}
 #disclaimer p {
-  width: 80%;
+  width: 100%;
   margin: auto;
+  text-align: left;
   font-style: italic;
+  font-size: 0.7em;
+  padding: 0.5em;
+}
+
+.disclaimer-cont {
+  visibility: hidden;
+  width: 70%;
+}
+
+.disclaimer-cont-show {
+  visibility: show;
+  width: 70%;
+  animation: slide 0.2s;
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(-3em);
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.rotate {
+  transform: rotate(180deg);
+  transition: 0.2s transform;
 }
 
 td {
@@ -159,15 +255,20 @@ table:hover td {
     width: 75%;
     font-size: 0.8em;
   }
+
   #conversion-table {
     margin: 1em auto;
     font-size: 0.55em;
   }
+
   #instructions {
     width: 95%;
   }
+
   #disclaimer p {
     width: 95%;
     font-size: 0.7em;
   }
 }
+
+/*# sourceMappingURL=App.css.map */
