@@ -157,16 +157,40 @@ input[type=file] {
 #instructions .content-frame {
   padding: 1em;
 }
-
-#instructions ol {
-  display: inline-block;
-  text-align: center;
-  margin: 0 auto;
+#instructions .content-frame h2 {
+  margin-bottom: 0;
+}
+#instructions .content-frame hr {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  width: 30%;
 }
 
-#instructions ol li {
-  text-align: left;
+#instructions ul {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0 auto;
+  padding: 0;
+}
+
+#instructions ul li {
+  width: 16%;
+  text-align: center;
   padding-left: 1em;
+  font-size: 0.9em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#instructions ul li span {
+  padding: 0.5em 0.85em;
+  border-radius: 50%;
+  background: white;
+  color: gray;
+  margin-bottom: 0.5em;
 }
 
 .hr-main {

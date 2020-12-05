@@ -150,17 +150,41 @@ input[type="file"] {
     text-align: center;
     .content-frame {
         padding: 1em;
+        h2 {
+            margin-bottom: 0;
+        }
+        hr {
+            margin-top: 0.5em;
+            margin-bottom: 1em;
+            width: 30%;
+        }
     }
 }
-#instructions ol {
-    display: inline-block;
+#instructions ul {
+    display: flex;
     text-align: center;
+    justify-content: center;
+    align-items: flex-start;
     margin: 0 auto;
+    padding: 0;
 }
 
-#instructions ol li {
-    text-align: left;
+#instructions ul li {
+    width: 16%;
+    text-align: center;
     padding-left: 1em;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    span {
+        padding: 0.5em 0.85em;
+        border-radius: 50%;
+        background: white;
+        color: gray;
+        margin-bottom: 0.5em;
+    }
 }
 
 .hr-main {

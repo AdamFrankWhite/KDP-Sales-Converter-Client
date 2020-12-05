@@ -35,7 +35,7 @@ function App() {
                     <a href="#disclaimer">Disclaimer</a>
                 </div>
             </header>
-
+            <Instructions />
             <LoadingOverlay
                 active={loading}
                 spinner={
@@ -50,8 +50,6 @@ function App() {
             >
                 <FileInput loading={setLoading} />
             </LoadingOverlay>
-
-            <Instructions />
 
             <Footer />
         </div>
