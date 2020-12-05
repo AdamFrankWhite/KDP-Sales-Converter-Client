@@ -19,6 +19,11 @@ html {
   box-sizing: border-box;
 }
 
+nav a {
+  text-transform: uppercase;
+  font-size: 0.9em;
+}
+
 a {
   color: orange;
   font-size: 0.7em;
@@ -45,10 +50,24 @@ a:hover {
 
 .header-content {
   width: 80%;
-  margin: 3em auto;
+  margin: 2em auto;
   border-radius: 10px;
   background-color: rgba(40, 44, 52, 0.8);
-  padding: 0.5em;
+  padding: 2em;
+  text-align: right;
+}
+.header-content h1 {
+  margin: 0 auto;
+}
+.header-content hr {
+  width: 30%;
+  margin-right: 0;
+}
+.header-content .text-small {
+  width: 50%;
+  text-align: right;
+  margin-left: 50%;
+  font-size: 0.7em;
 }
 
 .file-input-cont {
@@ -71,7 +90,7 @@ input[type=file] {
 }
 .nav-cont nav {
   width: 100%;
-  background-color: #0f0f0f;
+  background-color: #005397;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -89,13 +108,15 @@ input[type=file] {
 }
 
 .upload-link {
-  width: 80%;
+  width: 60%;
+  background: #006fca;
+  text-transform: uppercase;
   margin: 0.75em auto 0 auto;
   border: 1px gray solid;
   border-radius: 5px;
-  font-size: 1.5em;
+  font-size: 1.3em;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
 
@@ -156,10 +177,6 @@ input[type=file] {
   margin: 1em auto;
 }
 
-.text-small {
-  font-size: 0.8em;
-}
-
 @media (min-width: 800px) {
   .content-frame {
     width: 70%;
@@ -180,7 +197,6 @@ input[type=file] {
 #disclaimer,
 #about {
   font-size: 0.7em;
-  margin: auto;
   width: 95%;
 }
 @media (min-width: 1000px) {

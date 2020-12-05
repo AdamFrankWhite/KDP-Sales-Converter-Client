@@ -21,6 +21,7 @@ function App() {
                         Tired of having to convert all the different royalty
                         currencies?
                     </p>
+                    <hr></hr>
                     <p>
                         Upload your .xlsx report file to convert all your
                         royalties into a single currency

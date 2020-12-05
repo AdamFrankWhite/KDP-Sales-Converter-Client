@@ -17,6 +17,10 @@ html {
     scroll-behavior: smooth;
     box-sizing: border-box;
 }
+nav a {
+    text-transform: uppercase;
+    font-size: 0.9em;
+}
 a {
     color: orange;
     font-size: 0.7em;
@@ -43,10 +47,24 @@ a {
 
 .header-content {
     width: 80%;
-    margin: 3em auto;
+    margin: 2em auto;
     border-radius: 10px;
     background-color: rgba(40, 44, 52, 0.8);
-    padding: 0.5em;
+    padding: 2em;
+    text-align: right;
+    h1 {
+        margin: 0 auto;
+    }
+    hr {
+        width: 30%;
+        margin-right: 0;
+    }
+    .text-small {
+        width: 50%;
+        text-align: right;
+        margin-left: 50%;
+        font-size: 0.7em;
+    }
 }
 
 .file-input-cont {
@@ -67,7 +85,7 @@ input[type="file"] {
     }
     nav {
         width: 100%;
-        background-color: rgb(15, 15, 15);
+        background-color: rgb(0, 83, 151);
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -87,13 +105,15 @@ input[type="file"] {
 }
 
 .upload-link {
-    width: 80%;
+    width: 60%;
+    background: rgb(0, 111, 202);
+    text-transform: uppercase;
     margin: 0.75em auto 0 auto;
     border: 1px gray solid;
     border-radius: 5px;
-    font-size: 1.5em;
+    font-size: 1.3em;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 
@@ -149,9 +169,6 @@ input[type="file"] {
 
 #conversion-table {
     margin: 1em auto;
-}
-.text-small {
-    font-size: 0.8em;
 }
 .content-frame {
     @media (min-width: 800px) {
