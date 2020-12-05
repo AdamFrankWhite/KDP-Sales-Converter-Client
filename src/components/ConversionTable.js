@@ -127,7 +127,7 @@ export default function ConversionTable(props) {
             let row = (
                 <tr>
                     <td>{singleMarketplaceCombinedSales.name}</td>
-                    <td>{singleMarketplaceCombinedSales.currency}</td>
+
                     <td>
                         {singleMarketplaceCombinedSales.ebookRoyalty.toFixed(2)}
                     </td>
@@ -136,6 +136,7 @@ export default function ConversionTable(props) {
                             2
                         )}
                     </td>
+                    <td>{singleMarketplaceCombinedSales.currency}</td>
                     <td>{singleMarketplaceTotal.toFixed(2)}</td>
                     <td className="gray-white">{convertedTotal}</td>
                 </tr>
@@ -160,9 +161,9 @@ export default function ConversionTable(props) {
             <thead>
                 <tr>
                     <td>Marketplace</td>
-                    <td>Currency</td>
                     <td>Ebook Royalty</td>
                     <td>Paperback Royalty</td>
+                    <td>Currency</td>
                     <td>Total</td>
                     <td className="gray-white">{props.chosenCurrency}</td>
                 </tr>

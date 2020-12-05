@@ -9,7 +9,9 @@ import NavBar from "./components/NavBar";
 import About from "./components/About";
 import Disclaimer from "./components/Disclaimer";
 import Footer from "./components/Footer";
+import CookieConsent from "react-cookie-consent";
 function App() {
+    const domainGroupId = "e3c514f6-3c5f-4271-9dc4-9f062ee1505c";
     const [loading, setLoading] = useState(false);
     return (
         <div className="App">
@@ -51,6 +53,28 @@ function App() {
                 <FileInput loading={setLoading} />
             </LoadingOverlay>
 
+            <CookieConsent
+                location="bottom"
+                buttonText="Got it!"
+                cookieName="myAwesomeCookieName2"
+                style={{ fontSize: "0.7em", background: "black" }}
+                className="fade-in"
+                buttonStyle={{
+                    color: "#4e503b",
+                    fontSize: "1em",
+                    background: "#14a7d0",
+                    color: "white",
+                    borderRadius: "5px",
+                    padding: "0.5em 1em",
+                }}
+                // expires={150}
+            >
+                We use cookies and other tracking technologies to improve your
+                browsing experience on our website, to show you personalized
+                content and targeted ads, to analyze our website traffic, and to
+                understand where our visitors are coming from. By using this
+                website you agree to these terms.
+            </CookieConsent>
             <Footer />
         </div>
     );

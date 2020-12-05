@@ -63,11 +63,14 @@ a:hover {
   width: 30%;
   margin-right: 0;
 }
+.header-content p:nth-of-type(2) {
+  font-size: 0.8em;
+}
 .header-content .text-small {
   width: 50%;
   text-align: right;
   margin-left: 50%;
-  font-size: 0.7em;
+  font-size: 0.6em;
 }
 
 .file-input-cont {
@@ -229,6 +232,10 @@ input[type=file] {
     padding: 2em;
   }
 }
+#disclaimer a,
+#about a {
+  font-size: 1em;
+}
 #disclaimer p,
 #about p {
   width: 100%;
@@ -255,8 +262,9 @@ input[type=file] {
 }
 
 footer {
+  border-top: 1px solid white;
   width: 100%;
-  margin: auto;
+  margin: 0.5em auto;
   display: flex;
   flex-direction: column;
 }
