@@ -7,6 +7,8 @@
   justify-content: center;
   font-size: calc(8px + 2vmin);
   color: white;
+  max-width: 1600px;
+  margin: auto;
 }
 
 .App-logo {
@@ -17,6 +19,7 @@
 html {
   scroll-behavior: smooth;
   box-sizing: border-box;
+  background-color: #b4b4b4;
 }
 
 nav a {
