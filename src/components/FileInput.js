@@ -58,15 +58,23 @@ export default function FileInput(props) {
     };
     const [myCurrency, setMyCurrency] = useState("EUR");
     const [exchangeRates, setExchangeRates] = useState([]);
+    const [storedXRates, setStoredXRates] = useState({});
     const selectCurrency = () => {
-        axios
-            .get(
-                `https://v6.exchangerate-api.com/v6/e5e3cc2708d1043e5747038d/latest/${myCurrency}`
-            )
-            .then((res) => {
-                console.log(res);
-                setExchangeRates(res.data.conversion_rates);
-            });
+        if (!storedXRates[myCurrency]) {
+            axios
+                .get(
+                    `https://v6.exchangerate-api.com/v6/e5e3cc2708d1043e5747038d/latest/${myCurrency}`
+                )
+                .then((res) => {
+                    setStoredXRates({
+                        ...storedXRates,
+                        [myCurrency]: res.data.conversion_rates,
+                    });
+                    setExchangeRates(res.data.conversion_rates);
+                });
+        } else {
+            setExchangeRates(storedXRates[myCurrency]);
+        }
     };
     // Update sales totals once myCurrency has been set
     useEffect(() => {
