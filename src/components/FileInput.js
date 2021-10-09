@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ConversionTable from "./ConversionTable";
-import runMonthlyReport from "../functions/MonthlyReport";
 import DescriptionOutlinedIcon from "@material-ui/icons/DescriptionOutlined";
 
 export default function FileInput(props) {
@@ -11,6 +10,7 @@ export default function FileInput(props) {
     const [error, setError] = useState("");
     const [data, setData] = useState(null);
     useEffect(() => {
+        // When book data changes, set ebook/paperback arrays
         if (data) {
             let parsedData = JSON.parse(data);
             //Filter books in paperbacks and ebooks
@@ -51,31 +51,21 @@ export default function FileInput(props) {
                 formData
             )
             .then((data) => {
-                console.log(data.data);
-                //checks if monthly report, if so need to restructure json
-                if (data.data[0].hasOwnProperty("Sales Period")) {
-                    console.log("Monthly report");
-                    console.log(data);
-                    runMonthlyReport(data.data);
-                } else if (data.data[0].hasOwnProperty("Date")) {
-                    console.log("Historical report");
-                } else if (data.data[0].hasOwnProperty("Title")) {
-                    setData(JSON.stringify(data.data));
-                    props.loading(false);
-                } else {
-                    console.log("Error");
-                    props.loading(false);
-                }
+                // Set data to state
+                setData(JSON.stringify(data.data));
+                props.loading(false);
             });
     };
     const [myCurrency, setMyCurrency] = useState("EUR");
     const [exchangeRates, setExchangeRates] = useState([]);
     const selectCurrency = () => {
         axios
-            .get(`https://api.exchangeratesapi.io/latest?base=${myCurrency}`)
+            .get(
+                `https://api.exchangeratesapi.io/v1/latest?access_key=9bc655b1190de0bb54d463e6ce9faaf0&base=${myCurrency}`
+            )
             .then((res) => {
+                console.log(res);
                 setExchangeRates(res.data.rates);
-                console.log(res.data.rates);
             });
     };
     // Update sales totals once myCurrency has been set

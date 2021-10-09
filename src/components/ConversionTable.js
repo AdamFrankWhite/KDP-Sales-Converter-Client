@@ -1,75 +1,10 @@
 import React from "react";
-
+import marketplaces from "../data/Marketplaces";
 export default function ConversionTable(props) {
     let paperbacks = props.paperbacks;
     let ebooks = props.ebooks;
 
-    let marketplaces = {
-        CAD: {
-            name: "Amazon.ca",
-            currency: "CAD",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-
-        USD: {
-            name: "Amazon.com",
-            currency: "USD",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-
-        GBP: {
-            name: "Amazon.co.uk",
-            currency: "GBP",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-
-        EUR: {
-            name: "Amazon.de/es/fr/it/nl",
-            currency: "EUR",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-
-        JPY: {
-            name: "Amazon.co.jp",
-            currency: "JPY",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-
-        INR: {
-            name: "Amazon.in",
-            currency: "INR",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-
-        BRL: {
-            name: "Amazon.com.br",
-            currency: "BRL",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-
-        MXN: {
-            name: "Amazon.com.mx",
-            currency: "MXN",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-
-        AUD: {
-            name: "Amazon.com.au",
-            currency: "AUD",
-            ebookRoyalty: 0,
-            paperbackRoyalty: 0,
-        },
-    };
-
-    //Sort by currency
+    //Sort books by currency function
     const sortByCurrency = (books, royaltyType) => {
         let booksByCurrency = {
             CAD: [],
@@ -87,6 +22,7 @@ export default function ConversionTable(props) {
         });
         const bookSalesReducer = (accumulator, currentValue) =>
             accumulator + currentValue;
+        // Loop through sorted books by currency
         for (const currency in booksByCurrency) {
             let bookObjectGroup = booksByCurrency[currency];
             let sales = [];
@@ -94,31 +30,29 @@ export default function ConversionTable(props) {
                 sales.push(parseFloat(book.Royalty))
             );
             let singleCurrencyTotalSales = sales.reduce(bookSalesReducer, 0);
-            if (royaltyType === "paperbackRoyalty") {
-                marketplaces[currency].ebookRoyalty = singleCurrencyTotalSales;
-            } else if (royaltyType === "ebookRoyalty") {
-                marketplaces[
-                    currency
-                ].paperbackRoyalty = singleCurrencyTotalSales;
-            }
+
+            // Update book sales object with currency total
+            marketplaces[currency][royaltyType] = singleCurrencyTotalSales;
         }
     };
 
+    //Execute sort
     sortByCurrency(paperbacks, "paperbackRoyalty");
     sortByCurrency(ebooks, "ebookRoyalty");
 
     // Create table rows
     const rows = [];
     let combinedConvertedTotal = 0;
+    // Loop through marketplaces object by market/currency
     for (const marketplace in marketplaces) {
-        let singleMarketplaceCombinedSales = marketplaces[marketplace];
+        let singleMarketplace = marketplaces[marketplace];
         let singleMarketplaceTotal =
-            singleMarketplaceCombinedSales.ebookRoyalty +
-            singleMarketplaceCombinedSales.paperbackRoyalty;
+            singleMarketplace.ebookRoyalty + singleMarketplace.paperbackRoyalty;
         //Check if same currency as selected, to leave as is
-        let convertedTotal = (props.rates[marketplace]
-            ? singleMarketplaceTotal / props.rates[marketplace]
-            : singleMarketplaceTotal
+        let convertedTotal = (
+            props.rates[marketplace] == marketplace
+                ? singleMarketplaceTotal / props.rates[marketplace]
+                : singleMarketplaceTotal
         ).toFixed(2);
         // Add individual currency totals together
         combinedConvertedTotal += parseFloat(convertedTotal);
@@ -126,17 +60,10 @@ export default function ConversionTable(props) {
         if (singleMarketplaceTotal > 0) {
             let row = (
                 <tr>
-                    <td>{singleMarketplaceCombinedSales.name}</td>
-
-                    <td>
-                        {singleMarketplaceCombinedSales.ebookRoyalty.toFixed(2)}
-                    </td>
-                    <td>
-                        {singleMarketplaceCombinedSales.paperbackRoyalty.toFixed(
-                            2
-                        )}
-                    </td>
-                    <td>{singleMarketplaceCombinedSales.currency}</td>
+                    <td>{singleMarketplace.name}</td>
+                    <td>{singleMarketplace.ebookRoyalty.toFixed(2)}</td>
+                    <td>{singleMarketplace.paperbackRoyalty.toFixed(2)}</td>
+                    <td>{singleMarketplace.currency}</td>
                     <td>{singleMarketplaceTotal.toFixed(2)}</td>
                     <td className="gray-white">{convertedTotal}</td>
                 </tr>
@@ -144,6 +71,8 @@ export default function ConversionTable(props) {
             rows.push(row);
         }
     }
+
+    // Final, total row
     let totalRow = (
         <tr>
             <td className="gray-white">Total</td>
@@ -156,6 +85,7 @@ export default function ConversionTable(props) {
     );
     rows.push(totalRow);
 
+    // Return table element
     return (
         <table id="conversion-table">
             <thead>
