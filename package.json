@@ -20,6 +20,7 @@
     "serve": "^11.3.2"
   },
   "scripts": {
+    "client": "npm start",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts start",
