@@ -20,13 +20,13 @@
     "serve": "^11.3.2"
   },
   "scripts": {
-    "client": "npm start",
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
-    "test": "react-scripts start",
+    "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "heroku-postbuild": "npm run build"
-  },
+    },
   "eslintConfig": {
     "extends": "react-app"
   },
