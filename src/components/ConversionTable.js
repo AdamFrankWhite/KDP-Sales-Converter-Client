@@ -3,7 +3,6 @@ import marketplaces from "../data/Marketplaces";
 export default function ConversionTable(props) {
     let paperbacks = props.paperbacks;
     let ebooks = props.ebooks;
-
     //Sort books by currency function
     const sortByCurrency = (books, royaltyType) => {
         let booksByCurrency = {
@@ -50,9 +49,7 @@ export default function ConversionTable(props) {
             singleMarketplace.ebookRoyalty + singleMarketplace.paperbackRoyalty;
         //Check if same currency as selected, to leave as is
         let convertedTotal = (
-            props.rates[marketplace] == marketplace
-                ? singleMarketplaceTotal / props.rates[marketplace]
-                : singleMarketplaceTotal
+            singleMarketplaceTotal / props.rates[marketplace]
         ).toFixed(2);
         // Add individual currency totals together
         combinedConvertedTotal += parseFloat(convertedTotal);
