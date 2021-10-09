@@ -61,11 +61,11 @@ export default function FileInput(props) {
     const selectCurrency = () => {
         axios
             .get(
-                `https://api.exchangeratesapi.io/v1/latest?access_key=9bc655b1190de0bb54d463e6ce9faaf0&base=${myCurrency}`
+                `https://v6.exchangerate-api.com/v6/e5e3cc2708d1043e5747038d/latest/${myCurrency}`
             )
             .then((res) => {
                 console.log(res);
-                setExchangeRates(res.data.rates);
+                setExchangeRates(res.data.conversion_rates);
             });
     };
     // Update sales totals once myCurrency has been set
